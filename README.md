@@ -1,4 +1,4 @@
-# jquery.gauge
+# jquery.gauge [![Build Status](https://travis-ci.org/swehacker/jquery.gauge.svg)](https://travis-ci.org/swehacker/jquery.gauge)
 A simple gauge.
 
 ## Installation
