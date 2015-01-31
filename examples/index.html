@@ -1,0 +1,32 @@
+<html>
+<head>
+	<style>
+	body {
+		background: #333;
+	}
+	/*Centering the gauge*/
+	#canvas {
+		display: block;
+		width: 300px;
+		margin: 100px auto;
+	}
+	/*Custom font for numbers*/
+	@font-face {
+		font-family: "bebas";
+		src: url("http://thecodeplayer.com/uploads/fonts/BebasNeue.otf");
+	}
+	</style>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+	<script src="../src/jquery.gauge.js"></script>
+</head>
+<body>
+<canvas id="canvas" width="300" height="300">
+<script>
+$(document).ready(function (){
+	$("#canvas").gauge(70);
+});
+</script>
+</body>
+</html>
