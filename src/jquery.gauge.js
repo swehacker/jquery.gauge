@@ -54,7 +54,7 @@
 			function draw()
 			{
 				//Cancel any movement animation if a new chart is requested
-				if(typeof animation_loop != undefined) clearInterval(animation_loop);
+				if(typeof animation_loop !== undefined) clearInterval(animation_loop);
 
 				//random degree from 0 to 360
 				new_degrees = Math.round((value/100)*360);
