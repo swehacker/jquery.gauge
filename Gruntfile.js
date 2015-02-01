@@ -63,7 +63,7 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		'saucelabs-qunit': {
+		/*'saucelabs-qunit': {
 			all: {
 				options: {
 					urls: ['http://127.0.0.1:9999'],
@@ -152,7 +152,7 @@ module.exports = function (grunt) {
 					]
 				}
 			}
-		}
+		}*/
 	});
 
 	// Loading dependencies
@@ -163,6 +163,7 @@ module.exports = function (grunt) {
 	}
 
 	grunt.registerTask('default', ['jshint', 'qunit', 'uglify', 'compare_size']);
-	grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
-	grunt.registerTask('ci', ['jshint', 'qunit', 'saucelabs']);
+	//grunt.registerTask('saucelabs', ['connect:saucelabs', 'saucelabs-qunit']);
+	//grunt.registerTask('ci', ['jshint', 'qunit', 'saucelabs']);
+	grunt.registerTask('ci', ['jshint', 'qunit']);
 };
