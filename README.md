@@ -1,4 +1,4 @@
-# jquery.gauge [![Build Status](https://travis-ci.org/swehacker/jquery.gauge.svg)](https://travis-ci.org/swehacker/jquery.gauge)
+# jquery.gauge [![Build Status](https://travis-ci.org/swehacker/jquery.gauge.svg)](https://travis-ci.org/swehacker/jquery.gauge) [![Issues](http://img.shields.io/github/issues/swehacker/jquery.gauge.svg)]( https://github.com/swehacker/jquery.gauge/issues )
 A simple gauge.
 
 ## Installation
@@ -23,6 +23,20 @@ Create a canvas in where you want to place your gauge:
 And in between script tag lookup the canvas and use gauge(value)
 ```javascript
 $("#myGauge").gauge(70);
+```
+
+### Options
+Key | Default | Description
+----|---------|------------
+min | 0 | Minimum value, e.g temperature from -120 celsius
+max | 100 | Maximum value to display
+unit | % | Unit to be displayed after the value
+font | 50px verdana | Font to be used for the values
+color |  lightgreen | Color for the value and bar
+bgcolor | #222 | Background color for the bar
+
+```javascript
+$("#myGauge").gauge(70, { unit: "Volts" })
 ```
 
 ## Contributing
