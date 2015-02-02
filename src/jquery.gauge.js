@@ -1,87 +1,91 @@
 (function($) {
-	$.fn.gauge = function(value){
+	$.fn.gauge = function(value, options){
 		return this.each(function() {
+
+			var settings = $.extend({
+				min: 0,
+				max: 100,
+				unit: "%",
+				font: "50px verdana",
+				color: "lightgreen",
+				bgcolor: "#222",
+				title: ""
+			}, options);
+
 			//canvas initialization
 			var ctx = this.getContext("2d");
 
-			var W = canvas.width;
-			var H = canvas.height;
+			var W = this.width;
+			var H = this.height;
 
-			var degrees = 0;
-			var new_degrees = 0;
+			var position = 0;
+			var new_position = 0;
 			var difference = 0;
-			var color = "lightgreen"; //green looks better to me
-			var bgcolor = "#222";
+
 			var text;
 			var animation_loop, redraw_loop;
 
-			function init()
+			// Angle in radians = angle in degrees * PI / 180
+			function radians(degrees) {
+				return degrees * Math.PI / 180;
+			}
+
+
+			function update()
 			{
-				// Clear the canvas everytime a chart is drawn
 				ctx.clearRect(0, 0, W, H);
 
-				// Gauge will be an arc
+				// The gauge will be an arc
 				ctx.beginPath();
-				ctx.strokeStyle = bgcolor;
+				ctx.strokeStyle = settings.bgcolor;
 				ctx.lineWidth = 30;
-				ctx.arc(W/2, H/2, 100, 0, Math.PI*2, false); //you can see the arc now
+				ctx.arc(W/2, H/2, 100, radians(135), radians(45), false);
 				ctx.stroke();
 
-				//Angle in radians = angle in degrees * PI / 180
-				var radians = degrees * Math.PI / 180;
 				ctx.beginPath();
-				ctx.strokeStyle = color;
+				ctx.strokeStyle = settings.color;
 				ctx.lineWidth = 30;
-				
-				//The arc starts from the rightmost end. If we deduct 90 degrees from the angles
-				//the arc will start from the topmost end
-				ctx.arc(W/2, H/2, 100, 0 - 270*Math.PI/180, radians - 270*Math.PI/180, false); 
-				//you can see the arc now
-				ctx.stroke();
 
-				//Lets add the text
-				ctx.fillStyle = color;
-				ctx.font = "50px bebas";
-				text = Math.floor(degrees/360*100) + "%";
-				//Lets center the text
-				//deducting half of text width from position x
+				if (position > 0) {
+					ctx.arc(W/2, H/2, 100, radians(135), radians(135 + position), false);
+					ctx.stroke();
+				}
+
+				// Add the text
+				ctx.fillStyle = settings.color;
+				ctx.font = settings.font;
+				text = value + settings.unit;
+				// Center the text, deducting half of text width from position x
 				text_width = ctx.measureText(text).width;
-				//adding manual value to position y since the height of the text cannot
-				//be measured easily. There are hacks but we will keep it manual for now.
 				ctx.fillText(text, W/2 - text_width/2, H/2 + 15);
 			}
 
 			function draw()
 			{
-				//Cancel any movement animation if a new chart is requested
+				// Cancel any animation if a new chart is requested
 				if(typeof animation_loop !== undefined) clearInterval(animation_loop);
 
-				//random degree from 0 to 360
-				new_degrees = Math.round((value/100)*360);
-				difference = new_degrees - degrees;
-				//This will animate the gauge to new positions
-				//The animation will take 1 second
-				//time for each frame is 1sec / difference in degrees
+				new_position = Math.round((value/(settings.max - settings.min))*270);
+				difference = new_position - position;
 				animation_loop = setInterval(animate_to, 100/difference);
 			}
 
-			//function to make the chart move to new degrees
+			// Make the chart move to new degrees
 			function animate_to()
 			{
-				//clear animation loop if degrees reaches to new_degrees
-				if(degrees == new_degrees) 
+				// Clear animation loop if degrees reaches the new_degrees
+				if(position == new_position)
 					clearInterval(animation_loop);
 
-				if(degrees < new_degrees)
-					degrees++;
+				if(position < new_position)
+					position++;
 				else
-					degrees--;
+					position--;
 
-				init();
+				update();
 			}
 
-			//Lets add some animation for fun
-			draw();		
+			draw();
 		});
 	};
 })(jQuery);
