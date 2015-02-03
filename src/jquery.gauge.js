@@ -7,6 +7,7 @@
         max: 100,
         unit: "%",
         color: "lightgreen",
+        colorAlpha: 1,
         bgcolor: "#222",
         type: "default"
       }, options);
@@ -48,8 +49,10 @@
             ctx.lineWidth = W*0.13;
 
             if (position > 0) {
+              ctx.globalAlpha = settings.colorAlpha;
               ctx.arc(W / 2, H - (W/2 - ctx.lineWidth), (W/2) - ctx.lineWidth, radians(135), radians(135 + position), false);
               ctx.stroke();
+              ctx.globalAlpha = 1;
             }
 
             // Add the text
