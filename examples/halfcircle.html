@@ -8,7 +8,6 @@
 	canvas {
 		display: block;
 		float: left;
-		width: 300px;
 		margin: 10px auto;
 	}
 	</style>
@@ -21,17 +20,17 @@
 <canvas id="gauge3" width="300" height="300"></canvas>
 <canvas id="gauge4" width="300" height="300"></canvas>
 <canvas id="gauge5" width="300" height="300"></canvas>
-<canvas id="gauge6" width="200" height="150"></canvas>
-<canvas id="gauge7" width="200" height="200"></canvas>
+<canvas id="gauge6" width="200" height="200"></canvas>
+<canvas id="gauge7" width="200" height="150"></canvas>
 <script>
 $(document).ready(function (){
-	$("#gauge1").gauge(70, { type: "halfcircle"});
-	$("#gauge2").gauge(23, { unit: " Volt", font: "40px verdana", type: "halfcircle"});
-	$("#gauge3").gauge(100, { type: "halfcircle"});
-	$("#gauge4").gauge(0, { unit: " A",type: "halfcircle"});
-	$("#gauge5").gauge(1, { unit: " A",type: "halfcircle"});
-	$("#gauge6").gauge(0, { unit: " A",type: "halfcircle"});
-	$("#gauge7").gauge(1, { unit: " A",type: "halfcircle"});
+	$("#gauge1").gauge(0, { type: "halfcircle"});
+	$("#gauge2").gauge(1, { unit: " Volt", font: "40px verdana", type: "halfcircle"});
+	$("#gauge3").gauge(25, { type: "halfcircle"});
+	$("#gauge4").gauge(50, { unit: " A",type: "halfcircle"});
+	$("#gauge5").gauge(75, { unit: " A",type: "halfcircle"});
+	$("#gauge6").gauge(99, { unit: " A",type: "halfcircle"});
+	$("#gauge7").gauge(100, { unit: " A",type: "halfcircle"});
 });
 </script>
 </body>
