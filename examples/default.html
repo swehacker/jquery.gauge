@@ -1,0 +1,33 @@
+<html>
+<head>
+	<style>
+	body {
+		background: #333;
+	}
+	/*Centering the gauge*/
+	canvas {
+		display: block;
+		float: left;
+		margin: 10px auto;
+	}
+	</style>
+	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="../src/jquery.gauge.js"></script>
+</head>
+<body>
+<canvas id="gauge1" width="300" height="300"></canvas>
+<canvas id="gauge2" width="300" height="300"></canvas>
+<canvas id="gauge3" width="300" height="300"></canvas>
+<canvas id="gauge4" width="200" height="200"></canvas>
+<canvas id="gauge5" width="200" height="200"></canvas>
+<script>
+$(document).ready(function (){
+	$("#gauge1").gauge(70);
+	$("#gauge2").gauge(23, { unit: " Volt", font: "40px verdana"});
+	$("#gauge3").gauge(100);
+	$("#gauge4").gauge(0, { unit: " A"});
+	$("#gauge5").gauge(1, { unit: " A"});
+});
+</script>
+</body>
+</html>
