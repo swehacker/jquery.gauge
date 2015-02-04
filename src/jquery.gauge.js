@@ -17,8 +17,7 @@
 
       var W = this.width;
       var H = this.height;
-
-			console.log(W + ' : ' + H);
+      var centerW = (W/2);
 
       var position = 0;
       var new_position = 0;
@@ -41,7 +40,7 @@
             ctx.beginPath();
             ctx.strokeStyle = settings.bgcolor;
             ctx.lineWidth = W*0.13;
-            ctx.arc(W / 2, H - (W/2 - ctx.lineWidth), (W/2) - ctx.lineWidth, radians(135), radians(45), false);
+            ctx.arc(centerW, H - (centerW - ctx.lineWidth), (centerW) - ctx.lineWidth, radians(135), radians(45), false);
             ctx.stroke();
 
             ctx.beginPath();
@@ -50,7 +49,7 @@
 
             if (position > 0) {
               ctx.globalAlpha = settings.colorAlpha;
-              ctx.arc(W / 2, H - (W/2 - ctx.lineWidth), (W/2) - ctx.lineWidth, radians(135), radians(135 + position), false);
+              ctx.arc(centerW, H - (centerW - ctx.lineWidth), (centerW) - ctx.lineWidth, radians(135), radians(135 + position), false);
               ctx.stroke();
               ctx.globalAlpha = 1;
             }
@@ -62,7 +61,7 @@
             text = value + settings.unit;
             // Center the text, deducting half of text width from position x
             text_width = ctx.measureText(text).width;
-            ctx.fillText(text, W / 2 - text_width / 2, H - (W/2 - ctx.lineWidth) + 15);
+            ctx.fillText(text, centerW - text_width / 2, H - (centerW - ctx.lineWidth) + 15);
           }
 
           function draw() {
@@ -101,7 +100,7 @@
             ctx.beginPath();
             ctx.strokeStyle = settings.bgcolor;
             ctx.lineWidth = W * 0.13;
-            ctx.arc(W / 2, H, (W/2) - ctx.lineWidth, radians(180), radians(0), false);
+            ctx.arc(centerW, H, (centerW) - ctx.lineWidth, radians(180), radians(0), false);
             ctx.stroke();
 
             ctx.beginPath();
@@ -109,7 +108,7 @@
             ctx.lineWidth = W * 0.13;
 
             if (position > 0) {
-              ctx.arc(W / 2, H, (W/2) - ctx.lineWidth, radians(180), radians(180 + position), false);
+              ctx.arc(centerW, H, (centerW) - ctx.lineWidth, radians(180), radians(180 + position), false);
               ctx.stroke();
             }
 
@@ -120,7 +119,7 @@
             text = value + settings.unit;
             // Center the text, deducting half of text width from position x
             text_width = ctx.measureText(text).width;
-            ctx.fillText(text, W / 2 - text_width / 2, H - 10);
+            ctx.fillText(text, centerW - text_width / 2, H - 10);
           }
 
           function draw() {
