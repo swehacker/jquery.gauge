@@ -28,6 +28,7 @@ $("#myGauge").gauge(70);
 ### Options
 Key | Default | Description
 ----|---------|------------
+type| default | Type of gauge: default or halfcircle
 min | 0 | Minimum value, e.g temperature from -120 celsius
 max | 100 | Maximum value to display
 unit | % | Unit to be displayed after the value
