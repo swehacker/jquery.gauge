@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 			},
 			build: {
 				files: {
-					'build/jquery.gauge.min.js': 'jquery.gauge.js'
+					'jquery.gauge.min.js': 'src/jquery.gauge.js'
 				}
 			}
 		}
