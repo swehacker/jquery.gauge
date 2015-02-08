@@ -27,13 +27,13 @@ $(document).ready(function (){
 	$("#gauge1").gauge(0);
 	$("#gauge2").gauge(1, { unit: " Volt", font: "40px verdana"});
 	$("#gauge3").gauge(50);
-	$("#gauge4").gauge(75, { unit: " A"});
+	$("#gauge4").gauge(75, { unit: " A", title: "Ampere"});
 	$("#gauge5").gauge(99, { unit: " A"});
 	$("#gauge6").gauge(100, {color: "#FFF", colorAlpha: 0.7});
 	var gaugeCanvas = document.getElementById("gauge7");
 	var gauge = new Gauge(gaugeCanvas, {color: "#FFF", colorAlpha: 0.7});
 	gauge.value(0);
-	
+
 	var randomValue = function() {
 		gauge.value(Math.round(Math.random() * 100));
 	}

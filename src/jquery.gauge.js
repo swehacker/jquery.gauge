@@ -34,7 +34,8 @@ var Gauge = function(element, options) {
     color: "lightgreen",
     colorAlpha: 1,
     bgcolor: "#222",
-    type: "default"
+    type: "default",
+    title: ""
   };
 
   function mergeSettings() {
@@ -46,6 +47,7 @@ var Gauge = function(element, options) {
       settings.color = options.color || "lightgreen";
       settings.colorAlpha = options.colorAlpha || 1;
       settings.bgcolor = options.bgcolor || "#222";
+      settings.title = options.title || "";
       settings.type = options.type || "default";
     }
   }
@@ -59,6 +61,11 @@ var Gauge = function(element, options) {
 
   function init() {
     ctx.clearRect(0, 0, W, H);
+    var fontArgs = ctx.font.split(' ');
+    var titleFont = (W * 0.06) + 'px ' + fontArgs[fontArgs.length - 1];
+    var valueFont = (W * 0.16) + 'px ' + fontArgs[fontArgs.length - 1];
+
+    ctx.font = titleFont;
 
     // The gauge will be an arc
     ctx.beginPath();
@@ -69,8 +76,6 @@ var Gauge = function(element, options) {
 
     ctx.beginPath();
     ctx.strokeStyle = settings.color;
-    ctx.lineWidth = W * 0.13;
-
     if (position > 0) {
       ctx.globalAlpha = settings.colorAlpha;
       ctx.arc(centerW, H - (centerW - ctx.lineWidth), (centerW) - ctx.lineWidth, radians(135), radians(135 + position), false);
@@ -80,12 +85,15 @@ var Gauge = function(element, options) {
 
     // Add the text
     ctx.fillStyle = settings.color;
-    var fontArgs = ctx.font.split(' ');
-    ctx.font = (W * 0.16) + 'px ' + fontArgs[fontArgs.length - 1];
+
+    ctx.font = valueFont;
     text = value + settings.unit;
-    // Center the text, deducting half of text width from position x
     var text_width = ctx.measureText(text).width;
-    ctx.fillText(text, centerW - text_width / 2, H - (centerW - ctx.lineWidth) + 15);
+    ctx.fillText(text, centerW - text_width / 2, H - ((centerW - ctx.lineWidth) * 0.9));
+
+    ctx.font = titleFont;
+    var title_width = ctx.measureText(settings.title).width;
+    ctx.fillText(settings.title, centerW - title_width / 2, H - 40);
   }
 
   function draw() {
@@ -139,7 +147,8 @@ var HalfCircleGauge = function (element, options){
     color: "lightgreen",
     colorAlpha: 1,
     bgcolor: "#222",
-    type: "default"
+    type: "default",
+    title: ""
   };
 
   function mergeSettings() {
@@ -152,6 +161,7 @@ var HalfCircleGauge = function (element, options){
       settings.colorAlpha = options.colorAlpha || 1;
       settings.bgcolor = options.bgcolor || "#222";
       settings.type = options.type || "default";
+      settings.title = options.title || "";
     }
   }
 
@@ -164,31 +174,42 @@ var HalfCircleGauge = function (element, options){
 
   function init() {
     ctx.clearRect(0, 0, W, H);
+    var fontArgs = ctx.font.split(' ');
+    var titleFont = (W * 0.06) + 'px ' + fontArgs[fontArgs.length - 1];
+    var valueFont = (W * 0.16) + 'px ' + fontArgs[fontArgs.length - 1];
+    ctx.font = titleFont;
 
     // The gauge will be an arc
     ctx.beginPath();
     ctx.strokeStyle = settings.bgcolor;
     ctx.lineWidth = W * 0.13;
-    ctx.arc(centerW, H, (centerW) - ctx.lineWidth, radians(180), radians(0), false);
+    ctx.arc(centerW, H - ctx.measureText("M").width * 2.5, (centerW) - ctx.lineWidth, radians(180), radians(0), false);
     ctx.stroke();
 
-    ctx.beginPath();
-    ctx.strokeStyle = settings.color;
-    ctx.lineWidth = W * 0.13;
-
     if (position > 0) {
-      ctx.arc(centerW, H, (centerW) - ctx.lineWidth, radians(180), radians(180 + position), false);
+      ctx.beginPath();
+      ctx.strokeStyle = settings.color;
+      ctx.arc(centerW, H - ctx.measureText("M").width * 2.5, (centerW) - ctx.lineWidth, radians(180), radians(180 + position), false);
       ctx.stroke();
     }
 
-    // Add the text
     ctx.fillStyle = settings.color;
-    var fontArgs = ctx.font.split(' ');
-    ctx.font = (W * 0.16) + 'px ' + fontArgs[fontArgs.length - 1];
+    ctx.font = valueFont;
     text = value + settings.unit;
-    // Center the text, deducting half of text width from position x
     text_width = ctx.measureText(text).width;
-    ctx.fillText(text, centerW - text_width / 2, H - 10);
+    ctx.fillText(text, centerW - text_width / 2, H - (ctx.measureText("M").width * 1.15));
+
+    ctx.font = titleFont;
+    var mWidth = ctx.measureText("M").width;
+    var title_width = ctx.measureText(settings.title).width;
+    ctx.fillText(settings.title, centerW - title_width / 2, H - mWidth);
+
+    var min_width = ctx.measureText(settings.min).width;
+    ctx.fillText(settings.min, ctx.lineWidth - min_width / 2, H - mWidth);
+
+    var max_width = ctx.measureText(settings.max).width / 2;
+    ctx.fillText(settings.max, W - ctx.lineWidth - max_width, H - mWidth);
+
   }
 
   function draw() {
@@ -218,4 +239,6 @@ var HalfCircleGauge = function (element, options){
     value = v;
     draw();
   };
+
+  draw();
 };
