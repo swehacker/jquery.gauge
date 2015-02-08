@@ -3,21 +3,15 @@
     return this.each(function() {
       if (options) {
         if ( options.type === "halfcircle") {
-          var gauge = new HalfCircleGauge(this, options);
-          gauge.value(value);
-          return gauge;
+          return new HalfCircleGauge(this, options).value(value);
         } else {
-          var gauge = new Gauge(this, options);
-          gauge.value(value);
-          return gauge;
+          return new Gauge(this, options).value(value);
         }
       } else {
-        var gauge = new Gauge(this, options);
-        gauge.value(value);
-        return gauge;
+        return new Gauge(this, options).value(value);
       }
     });
-  }
+  };
 })(jQuery);
 
 var Gauge = function(element, options) {
@@ -41,7 +35,7 @@ var Gauge = function(element, options) {
     colorAlpha: 1,
     bgcolor: "#222",
     type: "default"
-  }
+  };
 
   function mergeSettings() {
     if (options) {
@@ -122,8 +116,8 @@ var Gauge = function(element, options) {
   this.value = function(v) {
     value = v;
     draw();
-  }
-}
+  };
+};
 
 var HalfCircleGauge = function (element, options){
   var ctx = element.getContext("2d");
@@ -146,7 +140,7 @@ var HalfCircleGauge = function (element, options){
     colorAlpha: 1,
     bgcolor: "#222",
     type: "default"
-  }
+  };
 
   function mergeSettings() {
     if (options) {
@@ -223,5 +217,5 @@ var HalfCircleGauge = function (element, options){
   this.value = function(v) {
     value = v;
     draw();
-  }
-}
+  };
+};
