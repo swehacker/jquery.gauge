@@ -23,6 +23,7 @@
 <canvas id="gauge6" width="200" height="200"></canvas>
 <canvas id="gauge7" width="200" height="150"></canvas>
 <canvas id="gauge8" width="200" height="150"></canvas>
+<canvas id="gauge9" width="200" height="150"></canvas>
 <script>
 $(document).ready(function (){
 	$("#gauge1").gauge(0, { type: "halfcircle"});
@@ -40,8 +41,12 @@ $(document).ready(function (){
 	var randomValue = function() {
 		gauge.value(Math.round(Math.random() * 100));
 	}
-
 	setInterval(randomValue, 1000);
+
+	// Check if the update the same value isnt flickering
+	var gaugeCanvas9 = document.getElementById("gauge9");
+	var gauge8 = new HalfCircleGauge(gaugeCanvas9, {color: "#FFF", colorAlpha: 0.7});
+	setInterval(gauge8.value(30), 1000);
 });
 </script>
 </body>

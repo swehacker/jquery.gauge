@@ -22,6 +22,7 @@
 <canvas id="gauge5" width="200" height="200"></canvas>
 <canvas id="gauge6" width="200" height="200"></canvas>
 <canvas id="gauge7" width="200" height="200"></canvas>
+<canvas id="gauge8" width="200" height="200"></canvas>
 <script>
 $(document).ready(function (){
 	$("#gauge1").gauge(0);
@@ -30,6 +31,7 @@ $(document).ready(function (){
 	$("#gauge4").gauge(75, { unit: " A", title: "Ampere"});
 	$("#gauge5").gauge(99, { unit: " A"});
 	$("#gauge6").gauge(100, {color: "#FFF", colorAlpha: 0.7});
+
 	var gaugeCanvas = document.getElementById("gauge7");
 	var gauge = new Gauge(gaugeCanvas, {color: "#FFF", colorAlpha: 0.7});
 	gauge.value(0);
@@ -39,6 +41,11 @@ $(document).ready(function (){
 	}
 
 	setInterval(randomValue, 1000);
+
+	// Check if the update the same value isnt flickering
+	var gaugeCanvas8 = document.getElementById("gauge8");
+	var gauge8 = new Gauge(gaugeCanvas8, {color: "#FFF", colorAlpha: 0.7});
+	setInterval(gauge8.value(30), 1000);
 });
 </script>
 </body>
